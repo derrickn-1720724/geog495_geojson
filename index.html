@@ -71,8 +71,8 @@
 
             <table>
                 <tr>
-                    <th>Scale Rank</th>
                     <th>Name</th>
+                    <th>Scale Rank</th>
                     <th>GPS Code</th>
                 </tr>
             </table>
@@ -107,8 +107,8 @@
                 cell1 = row.insertCell(0);
                 cell2 = row.insertCell(1);
                 cell3 = row.insertCell(2);
-                cell1.innerHTML = airports.features[i].properties.scalerank;
-                cell2.innerHTML = airports.features[i].properties.name;
+                cell1.innerHTML = airports.features[i].properties.name;
+                cell2.innerHTML = airports.features[i].properties.scalerank;
                 cell3.innerHTML = airports.features[i].properties.gps_code;
 
             }
@@ -158,34 +158,31 @@
         let btn = document.getElementsByTagName("button")[0];
 
         btn.addEventListener('click', sortTable);
-
+        
         function sortTable(e) {
             let table, rows, switching, i, x, y, shouldSwitch;
             table = document.getElementsByTagName("table")[0];
             switching = true;
+            
             while (switching) {
                 switching = false;
                 rows = table.rows;
-
-                for (i = 1; i < (rows.length - 1); i++) {
-                    shouldSwitch = false;
-
+                
+            for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;         
                     x = parseFloat(rows[i].getElementsByTagName("td")[1].innerHTML);
                     y = parseFloat(rows[i + 1].getElementsByTagName("td")[1].innerHTML);
-                    if (x < y) {
-                        shouldSwitch = true;
-                        break;
-                    }
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+            }
                 }
-
-                if (shouldSwitch) {
+                if (shouldSwitch) { 
                     rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
                     switching = true;
                 }
             }
         }
     </script>
-
 </body>
-
 </html>
